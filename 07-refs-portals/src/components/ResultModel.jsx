@@ -21,6 +21,7 @@
 
 
 import { useImperativeHandle , useRef } from "react";
+import { createPortal } from 'react-dom';
 
 export default function ResultModel({ targetTime , ref , remainingTime , onReset}){
 
@@ -48,9 +49,13 @@ export default function ResultModel({ targetTime , ref , remainingTime , onReset
         }
     } );
 
-// now with this setup here we can go to the Timmerchallenge.jsx file and you can use .expose() insted of .showModal()
+// now with this setup here we can go to the Timerchallenge.jsx file and you can use .expose() insted of .showModal()
 
-    return (
+    // createPortal is giving us option where we want to put our component and the location should be mentioned 
+    // createPortal takes two arguments one is the html element that you wanted to render and the other is location where you want to render it
+
+    // after doing this when you inspect the page on browser the component will be visible on the top of the body inside the modal div
+    return  createPortal(
 
         // the ref is important here to show the result on the screen;
         <dialog ref={dialog} className="result-modal" onClose={onReset}>
@@ -64,6 +69,8 @@ export default function ResultModel({ targetTime , ref , remainingTime , onReset
             <form action="dialog" onSubmit={onReset}>
                 <button>Close</button>
             </form>
-        </dialog>
+        </dialog>,
+        // this id is presented in index.html file
+        document.getElementById('modal')
     )
 }
