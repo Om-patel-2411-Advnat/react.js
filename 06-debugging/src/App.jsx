@@ -10,13 +10,15 @@ function App() {
     annualInvestment: 1200,
     expectedReturn: 6,
     duration: 10,
+    isyearly: true ,
   });
 
   function handleChange(inputIdentifier, newValue) {
     setUserInput((prevUserInput) => {
       return {
         ...prevUserInput,
-        [inputIdentifier]: parseFloat(newValue),
+        [inputIdentifier]: 
+        (inputIdentifier === 'isyearly' ? !prevUserInput.isyearly : parseFloat(newValue)),
       };
     });
   }
