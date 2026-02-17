@@ -1,8 +1,7 @@
 import { useEffect , useState } from "react"
 
-const TIMER = 10000;
 
-export default function QuestionTimer({ onConfirm }){
+export default function QuestionTimer({ onConfirm , TIMER , mode}){
 
     const [remainingTime , setRemainingTime] = useState(0)
 
@@ -27,6 +26,6 @@ export default function QuestionTimer({ onConfirm }){
     }, [onConfirm])
 
     return (
-        <progress id="question-time" value={remainingTime} max={TIMER}/>
+        <progress id="question-time" value={remainingTime} max={TIMER} className={mode} />
     )
 }
