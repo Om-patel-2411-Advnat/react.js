@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 export default function Signup() {
+
+    const [passwordArenotEqual , setPasswordArenotEqual] = useState(false);
 
     // here you can use useRef and useState but it would be more complex to implement and required lot of work to be done
     // now we are going to use built in feature for getting hold of this values because it turns out that browser actually helps you with handling the form submission 
@@ -20,6 +24,12 @@ export default function Signup() {
         const data = Object.fromEntries(formdata.entries());
         // here we are merging the data 
         data.acquisition = acquisitionChannel;
+
+        if (data.password !== data['confirm-password']){
+            setPasswordArenotEqual(true);
+            return;
+        }
+
         console.log(data);
 
         // this will reset the form and act same as when we pass the button type reset like this " type = 'reset' "
@@ -33,13 +43,14 @@ export default function Signup() {
 
             <div className="control">
                 <label htmlFor="email">Email</label>
-                <input id="email" type="email" name="email" />
+                {/* we can use some inbuilt methods of html tags for validation like this "required"     */}
+                <input id="email" type="email" name="email" required />
             </div>
 
             <div className="control-row">
                 <div className="control">
                     <label htmlFor="password">Password</label>
-                    <input id="password" type="password" name="password" />
+                    <input id="password" type="password" name="password" required/>
                 </div>
 
                 <div className="control">
@@ -48,7 +59,11 @@ export default function Signup() {
                         id="confirm-password"
                         type="password"
                         name="confirm-password"
+                        required
                     />
+                    <div className="control-error">
+                        {passwordArenotEqual && <p>Password must be the same</p>}
+                    </div>
                 </div>
             </div>
 
@@ -57,18 +72,18 @@ export default function Signup() {
             <div className="control-row">
                 <div className="control">
                     <label htmlFor="first-name">First Name</label>
-                    <input type="text" id="first-name" name="first-name" />
+                    <input type="text" id="first-name" name="first-name" required />
                 </div>
 
                 <div className="control">
                     <label htmlFor="last-name">Last Name</label>
-                    <input type="text" id="last-name" name="last-name" />
+                    <input type="text" id="last-name" name="last-name" required />
                 </div>
             </div>
 
             <div className="control">
                 <label htmlFor="phone">What best describes your role?</label>
-                <select id="role" name="role">
+                <select id="role" name="role" required>
                     <option value="student">Student</option>
                     <option value="teacher">Teacher</option>
                     <option value="employee">Employee</option>
@@ -107,8 +122,8 @@ export default function Signup() {
 
             <div className="control">
                 <label htmlFor="terms-and-conditions">
-                    <input type="checkbox" id="terms-and-conditions" name="terms" />I
-                    agree to the terms and conditions
+                    <input type="checkbox" id="terms-and-conditions" name="terms" required />
+                    I agree to the terms and conditions
                 </label>
             </div>
 
