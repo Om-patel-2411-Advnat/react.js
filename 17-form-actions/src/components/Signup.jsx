@@ -66,7 +66,7 @@ export default function Signup() {
   // this hook always wants a action function as a value 
   // this hook aims to manage some form related state for you or some action related state but at the end actions are related to the forms 
   // that's why it's needs a second value where you can provide initial state value because this action function may then return an updated state
-  // here we need initial state because when the form is not submitted than the formData will not exists for for that we have o provide initial value and  it will be active if the action is has not been executed yet 
+  // here we need initial state because when the form is not submitted than the formData will not exists for for that we have to provide initial value and  it will be active if the action is has not been executed yet 
   // we don't just get the value of the form array into the form State but we also get the formAction and this function is wrap around the function that we provide in this case it's " SignupAction " 
   // that's why we get an updated formAction which in the end is our formAction but enhanced by react (it's the same function that we provide to the action but it will come with some extra features or react being aware of it) that's why now this action method should be set as a action prop into the form 
   // the last element you get is a pending element which is true or false depending on whether form is currently being submitted or not here we are not using it because we don't need it 

@@ -107,7 +107,7 @@ export default function CartContextProvider( {children} ){
 
     }
     // here we are creating an object to pass into the value so we can also able to update the context with the state
-    // as we discuss we just don't want to reacd we want to update so will also pass function in it
+    // as we discuss we just don't want to read we want to update so will also pass function in it
     const ctxValue = {
         items: shoppingCartState.items,
         addItemToCart: handleAddItemToCart,
