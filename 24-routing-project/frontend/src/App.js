@@ -20,40 +20,64 @@
 // 7. Output the ID of the selected event on the EventDetailPage
 // BONUS: Add another (nested) layout route that adds the <EventNavigation> component above all /events... page components
 
-import { createBrowserRouter , RouterProvider} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import HomePage from './pages/Home.js';
-import EventsPage from './pages/Events.js';
-import EventDetailsPage from './pages/EventDetail.js';
+import EventsPage, { Loader as eventsLoader } from './pages/Events.js';
+import EventDetailsPage, { loader as eventDetailLoader , action as deleteEventAction } from './pages/EventDetail.js';
 import NewEventPage from './pages/NewEvent.js';
 import EditEventPage from './pages/EditEvent.js';
 import RootPage from './pages/Root.js';
 import EventsRootPage from './pages/EventsRoot.js';
+import ErrorPage from './pages/Error.js';
+import { action as ManipulateAction } from './components/EventForm.js';
+import NewsletterPage, { action as newsletterAction } from './pages/Newsletter.js';
 
 
-  const router = createBrowserRouter([
-    {
-      path : '',
-      element: <RootPage />,
-      children : [
-        { index : true , element : <HomePage />},
-        { 
-          path: 'events' , 
-          element : <EventsRootPage /> ,
-          children: [
-            { index : true , element : <EventsPage />},
-            { path: ':id' , element : <EventDetailsPage />},
-            { path: 'new' , element : <NewEventPage />},
-            { path: ':id/edit' , element : <EditEventPage />} 
-          ]
-        },
-      ]
-      
-    }
-  ])
+const router = createBrowserRouter([
+  {
+    path: '',
+    element: <RootPage />,
+    errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <HomePage /> },
+      {
+        path: 'events',
+        element: <EventsRootPage />,
+        children: [
+          // here the loader is used for returning a function which will be used when ever this component is rendered and the data will be only loaded when the component is rendering or before that
+          {
+            index: true,
+            element: <EventsPage />,
+            loader: eventsLoader
+          },
+          {
+            path: ':id',
+            // here we have to use id for getting the specific data and we will use different hook which works same as useLoaderHook but it takes id for checking from which loader to take data
+            id: 'event-details',
+            // here we are making this route as a parent because we want to pass the same loader to the both components that's why now they both can use this loader
+            loader: eventDetailLoader,
+            children: [
+              { index: true, element: <EventDetailsPage />, action : deleteEventAction },
+              { path: 'edit', element: <EditEventPage />, action: ManipulateAction }
+            ]
+          },
+          // just like loader action is used to send the data to the backend 
+          { path: 'new', element: <NewEventPage />, action: ManipulateAction },
+        ]
+      },
+      {
+        path: 'newsletter',
+        element: <NewsletterPage />,
+        action: newsletterAction,
+      },
+    ]
+
+  }
+])
 
 function App() {
 
-  return <RouterProvider router={router}/>;
+  return <RouterProvider router={router} />;
 }
 
 export default App;

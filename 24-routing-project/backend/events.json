@@ -1,11 +1,53 @@
 {
-  "events": [
-    {
-      "id": "e1",
-      "title": "A dummy event",
-      "date": "2023-02-22",
-      "image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
-      "description": "Join this amazing event and connect with fellow developers."
-    }
-  ]
+    "events": [
+        {
+            "title": "helloserhtr",
+            "image": "https://www.eventsindustryforum.co.uk/images/articles/about_the_eif.jpg",
+            "date": "2026-03-13",
+            "description": "go to hell",
+            "id": "a97b39df-8b15-46be-b354-0316a296b356"
+        },
+        {
+            "title": "sdtbtdyfntdfyn dgh b",
+            "image": "https://www.eventsindustryforum.co.uk/images/articles/about_the_eif.jpg",
+            "date": "2026-03-22",
+            "description": "sthbghnfghnfghn fghbn fghb",
+            "id": "2d300c5e-fad7-42ab-9cfa-6db608918c8f"
+        },
+        {
+            "title": ",SMehdn",
+            "image": "https://www.eventsindustryforum.co.uk/images/articles/about_the_eif.jpg",
+            "date": "2026-03-20",
+            "description": "sazsd,fjv fnxgcv,xc",
+            "id": "1761d930-5e51-47f4-9f49-532263055bea"
+        },
+        {
+            "title": "rsthbesrf",
+            "image": "https://www.eventsindustryforum.co.uk/images/articles/about_the_eif.jpg",
+            "date": "2026-03-22",
+            "description": "sdthbd tfyg",
+            "id": "c3e45232-c354-4030-983b-9c5c44d66bc7"
+        },
+        {
+            "title": "dfyhbtdyfg",
+            "image": "https://www.eventsindustryforum.co.uk/images/articles/about_the_eif.jpg",
+            "date": "2026-03-15",
+            "description": "dfyhbtdyfgb",
+            "id": "a5ecbca4-deb8-4e36-b064-c97926db490d"
+        },
+        {
+            "title": "dtdghbdrtfg",
+            "image": "https://www.eventsindustryforum.co.uk/images/articles/about_the_eif.jpg",
+            "date": "2026-03-04",
+            "description": "sezdgrbsrftgbdfxhb ",
+            "id": "727c67d0-4a3e-40bf-995e-a10f7abe5855"
+        },
+        {
+            "id": "e1",
+            "title": "A dummy event",
+            "date": "2023-02-22",
+            "image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
+            "description": "Join this amazing event and connect with fellow developers."
+        }
+    ]
 }
