@@ -44,7 +44,7 @@ export async function getStaticPaths(){
         // false means your path contains all meetupId values that means use enters anything that's not supported let's say 'm3'  than user will face 404 error 
         // true means nextJs would try to generate a page for this meetup id ( 'm3' in this case ) dynamically on the server for the incoming request 
         // fallback is good because it let you pre-generate some of your pages for specific meetupId values , for example the page those are visited most frequently and then pre-generate the missing ones dynamically when request for them are coming in 
-        fallback : false ,
+        fallback : true ,
         paths : meetups.map((meetup) => ({ 
             params : { 
                 meetupId : meetup._id.toString() ,   

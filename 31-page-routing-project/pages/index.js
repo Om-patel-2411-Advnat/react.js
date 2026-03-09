@@ -85,7 +85,7 @@ export async function getStaticProps(){
         // when we add this property we unlock a new feature called incremental static generation
         // it wants a number , and this number is the number of the seconds NextJs will wait until it's regenerates this page for an incoming request 
         // if we sen the number to 10 than this component would be regenerate on the server at least every 10 seconds if there are requests coming in for this page and than this regenerated pages would replace the old pages 
-        revalidate : 10 , // seconds
+        revalidate : 1 , // seconds
     };
 }
 
