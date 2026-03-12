@@ -1,24 +1,54 @@
 import { Link } from 'react-router-dom';
+// to animate when the scroll and image we can use this two hooks 
+// 1] useScroll : this is used to get the values of how far user scroll
+// 2] useTransform : this allows us to transform the values we can use in animation for example we get the values from the scrolling and use them to animate the content
+import { motion , useScroll , useTransform } from 'framer-motion';
 
 import cityImg from '../assets/city.jpg';
 import heroImg from '../assets/hero.png';
 
 export default function WelcomePage() {
+
+  // this hook returns an object and in that object we can get the scrollY means how much pixels user scroll on Y axis and same on X axis by scrollX and many more things that this hook provides 
+  // scrollProgress gives us the values between 0 and 1 here 0 means user is at the top of the page and 1 means user is at the bottom of the page 
+  const { scrollY } = useScroll();
+
+  // it takes the value to be transformed and the second value it takes is a array of breakpoints and third value an array of values.
+  // those breakpoint and the values between those breakpoint should be transformed too
+  const opacityCity = useTransform( scrollY , [0 , 200 , 300 , 400 , 500 ] , [1 , 0.8 , 0.5 , 0.3 , 0] );
+  const Ycity = useTransform( scrollY , [0 ,200] , [0 ,-100]);
+  const opacityHero = useTransform( scrollY , [0 , 300 , 500 ] , [1 , 0.5 , 0] );
+  const YHero = useTransform( scrollY , [0 ,200] , [0 ,-150]);
+  const scaleText = useTransform( scrollY , [0 ,300] , [1 , 1.5] );
+  const YText = useTransform ( scrollY , [0 , 200 ,300 ,500] ,[0 ,50 ,100 ,200]); 
+
   return (
     <>
       <header id="welcome-header">
-        <div id="welcome-header-content">
+        <motion.div 
+          style={{ scale : scaleText , y : YText }}
+          id="welcome-header-content"
+        >
           <h1>Ready for a challenge?</h1>
           <Link id="cta-link" to="/challenges">
             Get Started
           </Link>
-        </div>
-        <img
+        </motion.div>
+        <motion.img
+          // here we can not use animate props for using the transform values 
+          // animate={{}}
+
+          style={{ opacity : opacityCity , y : Ycity }}
           src={cityImg}
           alt="A city skyline touched by sunlight"
           id="city-image"
         />
-        <img src={heroImg} alt="A superhero wearing a cape" id="hero-image" />
+        <motion.img 
+          style={{ opacity : opacityHero , y : YHero }}
+          src={heroImg} 
+          alt="A superhero wearing a cape" 
+          id="hero-image" 
+        />
       </header>
       <main id="welcome-content">
         <section>
