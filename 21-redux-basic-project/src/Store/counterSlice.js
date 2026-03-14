@@ -4,7 +4,7 @@ const initialCounterState = { counter : 0 , showCounter : true }
 
 // after creating call it like that 
 // here we are preparing our slice for the global state and when we have different pieces of state which are not directly related (like authentication state and counter state) we could create different slices potentially in different files to make our code maintainable 
-// here we just have one state counter state that's we will create just one slice 
+// here we just have one state counter that's why we will create just one slice 
 // here we have to use return value of calling createSlice because here we get back our data
 const counterSlice  = createSlice({
     // this is the identifier which every slice needs 
@@ -17,7 +17,7 @@ const counterSlice  = createSlice({
         // now here we have to create every method that is needed for that slice of state 
         // here every method will get latest state automatically 
         increment(state) {
-            // here we can mutate the state directly in the ReduxToolkit because toolkit calls imgur behind the scenes and create the clone of the existing state and keep all the states which we are not editing , and override the state which we are editing in s immutable way.
+            // here we can mutate the state directly in the ReduxToolkit because toolkit calls imgur behind the scenes and create the clone of the existing state and keep all the states which we are not editing , and override the state which we are editing in a immutable way.
             // but this is not allowed when you are not using the redux-toolkit 
             state.counter++;
         },

@@ -1,12 +1,15 @@
 import React from 'react';
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ReactDOM from 'react-dom/client';
+import {QueryClientProvider } from '@tanstack/react-query';
 
-import Posts , {loader as LoadingPosts} from './routes/Posts'
+import Posts from './routes/Posts.jsx'
 import './index.css'
-import NewPost , { action as newPostAction } from './routes/NewPost';
-import RootLayout from './routes/RootLayout';
-import PostDetails , {loader as LoadingDetails} from './routes/PostDetails';
+import NewPost from './routes/NewPost.jsx';
+import RootLayout from './routes/RootLayout.jsx';
+import PostDetails from './routes/PostDetails.jsx';
+import { queryClient } from './Utils/http.js';
+
 
 const router = createBrowserRouter([
   {
@@ -16,17 +19,14 @@ const router = createBrowserRouter([
       { 
         path: '/', 
         element: <Posts /> ,
-        loader: LoadingPosts ,
         children : [
           { 
             path: '/create-post', 
             element: <NewPost /> ,
-            action: newPostAction ,
           },
           {
             path : '/:id',
             element : <PostDetails />,
-            loader: LoadingDetails,
           }
         ] 
       },
@@ -37,6 +37,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>
 )

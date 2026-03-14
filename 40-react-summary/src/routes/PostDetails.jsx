@@ -1,10 +1,26 @@
-import { useLoaderData, Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
-import Modal from '../components/Modal';
+import Modal from '../components/Modal.jsx';
 import classes from './PostDetails.module.css';
+import { useQuery } from '@tanstack/react-query';
+import { fetchPostDetails } from '../Utils/http.js';
 
 export default function PostDetails() {
-    const post = useLoaderData();
+
+    const param = useParams();
+    const id = param.id;
+
+    const {data : post , isLoading , isError} = useQuery({
+        queryKey : ['posts' , id],
+        queryFn : () => fetchPostDetails(id)
+    })
+
+    if(isLoading){
+        return <p>Loading...</p>
+    }
+    if(isError){
+        return <p>Failed to fetch details</p>
+    }
 
     if (!post) {
         return (
@@ -26,14 +42,12 @@ export default function PostDetails() {
             <main className={classes.details}>
                 <p className={classes.author}>{post.author}</p>
                 <p className={classes.text}>{post.body}</p>
+                <p>
+                    <Link to=".." className={classes.btn}>
+                        Okay
+                    </Link>
+                </p>
             </main>
         </Modal>
     );
-}
-
-export async function loader({params}){
-    const response = await fetch(`http://localhost:8080/posts/${params.id}`);
-    const data = await response.json();
-
-    return data.post;
 }

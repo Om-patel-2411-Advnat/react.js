@@ -1,11 +1,7 @@
-import { useLoaderData } from 'react-router-dom';
-
-import Post from "./Post";
+import Post from "./Post.jsx";
 import classes from './PostList.module.css';
 
-export default function PostList() {
-
-    const posts = useLoaderData();
+export default function PostList({posts}) {
 
     return (
         <>

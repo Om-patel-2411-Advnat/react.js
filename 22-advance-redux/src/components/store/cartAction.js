@@ -33,7 +33,7 @@ export const fetchCartData = ()=>{
 // here we re going to create our own action creators let's see how we can do that
 // for general reducer function redux automatically creates an action creator method for us which contains { type : '' , payload : ''}
 // but in our own action creators we have to create our own action creator methods like we are doing in here 
-// but here we are not going to return a object as we know thunk returns a function ad that function that handle the action 
+// but here we are not going to return a object as we know thunk returns a function and that function that handle the action 
 // this is our " thunk " just an action creator 
 export const sendCartData = (cart) =>{
     return async (dispatch)=>{

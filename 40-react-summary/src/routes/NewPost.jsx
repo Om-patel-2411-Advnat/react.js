@@ -1,12 +1,35 @@
 import classes from './NewPost.module.css';
-import Modal from '../components/Modal';
-import { Link , Form , redirect } from 'react-router-dom';
+import Modal from '../components/Modal.jsx';
+import { Link , Form , useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import { sendingData } from '../Utils/http.js';
+import { queryClient } from '../Utils/http.js';
+
 
 export default function NewPost() {
 
+    const navigate = useNavigate();
+
+    const {mutate } = useMutation({
+        mutationFn : sendingData ,
+        onSuccess : ()=>{
+            queryClient.invalidateQueries({queryKey : ['posts']}),
+            navigate('/')
+        }
+    })
+
+    function HandleSubmit(event){
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const data = Object.fromEntries(formData) ;
+
+        mutate(data);
+    }
+
     return (
         <Modal >
-            <Form method='post' className={classes.form} >
+            <Form onSubmit={HandleSubmit} className={classes.form} >
                 <p>
                     <label htmlFor="body">Text</label>
                     <textarea id="body" name='body' required rows={3} />
@@ -22,18 +45,4 @@ export default function NewPost() {
             </Form>
         </Modal>
     );
-}
-
-export async function action({request}){
-    const formData = await request.formData();
-    const postData = Object.fromEntries(formData);
-    await fetch('http://localhost:8080/posts', {
-        method: 'POST',
-        body: JSON.stringify(postData),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-
-    return redirect('/');
 }
