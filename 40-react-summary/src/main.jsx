@@ -3,12 +3,12 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ReactDOM from 'react-dom/client';
 import {QueryClientProvider } from '@tanstack/react-query';
 
-import Posts from './routes/Posts.jsx'
+import Posts from './routes/Posts'
 import './index.css'
-import NewPost from './routes/NewPost.jsx';
-import RootLayout from './routes/RootLayout.jsx';
-import PostDetails from './routes/PostDetails.jsx';
-import { queryClient } from './Utils/http.js';
+import NewPost from './routes/NewPost';
+import RootLayout from './routes/RootLayout';
+import PostDetails from './routes/PostDetails';
+import { queryClient } from './Utils/http';
 
 
 const router = createBrowserRouter([
